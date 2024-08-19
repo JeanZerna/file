@@ -1,112 +1,117 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AhorcadoPalabras;
+# -*- coding: utf-8 -*-
+# Library
+import random
+
+# Global Variables
+ANSWERS = ['arroz', 'amarillo', 'amor', 'altar', 'ave', 'antro', 'azul', 'atomico',
+           'beso', 'baston', 'brea', 'britanico', 'becerro', 'bote', 'blanco',
+           'brasalete', 'brazo', 'bar', 'casa', 'centavo', 'cianuro', 'coco',
+           'cuerpo', 'calabaza', 'cerro', 'cinturon', 'col', 'cruz', 'dado',
+           'dragon', 'dos', 'diente', 'doctor', 'doce', 'duende', 'dardo', 'desde',
+           'donde', 'efe', 'eres', 'elefante', 'entero', 'feo', 'frente', 'fase',
+           'futbol', 'frase', 'frio', 'gato', 'gas', 'gel', 'gol', 'hola', 'hielo',
+           'haz', 'iglesia', 'juez', 'londres']
+CHALLENGE = ANSWERS[random.randint(0, len(ANSWERS) - 1)]
 
 
-namespace ahorcadoString
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-
-            ahorcado();
-
-            
-
-
-            Console.ReadKey();
-        }
-
-        public static void ahorcado()
-        {
-            int cont = 7;
-
-            GeneradorPalabras palabra = new GeneradorPalabras();
-
-            String palabraGenerada = palabra.SiguientePalabra;
-            StringBuilder adivinar = new StringBuilder(palabraGenerada);
-            
-
-            int longitud = palabraGenerada.Length;
-            longitud = longitud / 2;
-
-            palabraGenerada.ToCharArray();
+def run():
+    letters = list(CHALLENGE)
+    hiddenWord = ''
+    lettersChalleng = []
+    for letter in letters:
+        lettersChalleng.append(" -*- ")
+    showIntroduction()
+    tries = -1
+    while tries != 7:
+        word = input('Write a word: ')
+        response = checkAnswere(word)
+        if response is False:
+            tries += 1
+        else:
+            count = 0
+            for letter in letters:
+                if(word == letter):
+                    lettersChalleng[count] = letter
+                count += 1
+            hiddenWord = '|'.join(lettersChalleng)
+        if ''.join(lettersChalleng) != CHALLENGE:
+            printBoy(tries)
+            print(hiddenWord)
+        else:
+            congratulation()
+            tries = 8
+            break
 
 
-            for (int i = 0; i < palabraGenerada.Length; i++)
-            {
-                if (i == longitud || i == palabraGenerada.Length - 1)
-                {
-                    adivinar[i] = palabraGenerada[i];
-                }
-                else
-                {
-                    adivinar[i] = '_';
-                }
+def showIntroduction():
+    print("   ▄████████    ▄█    █▄     ▄██████▄     ▄████████  ▄████████    ▄████████ ████████▄   ▄██████▄")
+    print("  ███    ███   ███    ███   ███    ███   ███    ███ ███    ███   ███    ███ ███   ▀███ ███    ███")
+    print("  ███    ███   ███    ███   ███    ███   ███    ███ ███    █▀    ███    ███ ███    ███ ███    ███")
+    print("  ███    ███  ▄███▄▄▄▄███▄▄ ███    ███  ▄███▄▄▄▄██▀ ███          ███    ███ ███    ███ ███    ███")
+    print("▀███████████ ▀▀███▀▀▀▀███▀  ███    ███ ▀▀███████▀   ███        ▀███████████ ███    ███ ███    ███")
+    print("  ███    ███   ███    ███   ███    ███ ▀███████████ ███    █▄    ███    ███ ███    ███ ███    ███")
+    print("  ███    ███   ███    ███   ███    ███   ███    ███ ███    ███   ███    ███ ███   ▄███ ███    ███")
+    print("  ███    █▀    ███    █▀     ▀██████▀    ███    ███ ████████▀    ███    █▀  ████████▀   ▀██████▀")
+    printBoy(-1)
 
-            }
 
-            Console.WriteLine("Palabra a adivinar: ");
-            for (int i = 0; i < palabraGenerada.Length; i++)
-            {
-                Console.Write(" {0}", adivinar[i]);
-            }
-            Console.WriteLine("");
-            Console.WriteLine("");
+def congratulation():
+    print("███████╗███████╗██╗     ██╗ ██████╗██╗██████╗  █████╗ ██████╗ ███████╗███████╗")
+    print("██╔════╝██╔════╝██║     ██║██╔════╝██║██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝")
+    print("█████╗  █████╗  ██║     ██║██║     ██║██║  ██║███████║██║  ██║█████╗  ███████╗")
+    print("██╔══╝  ██╔══╝  ██║     ██║██║     ██║██║  ██║██╔══██║██║  ██║██╔══╝  ╚════██║")
+    print("██║     ███████╗███████╗██║╚██████╗██║██████╔╝██║  ██║██████╔╝███████╗███████║")
+    print("╚═╝     ╚══════╝╚══════╝╚═╝ ╚═════╝╚═╝╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝")
+    print("¡ Tu palabra es: {} !".format(CHALLENGE))
+    exit()
 
-            while (cont > 0)
-            {
-                Console.WriteLine("Dame una letra");
-                char letra = Convert.ToChar(Console.ReadLine());
-                bool esIgual = false;
 
-                for (int i = 0; i < palabraGenerada.Length; i++)
-                {
-                    if(letra == palabraGenerada[i])
-                    {
-                        adivinar[i] = letra;
-                        esIgual = true;
-                    }
-                }
+def printBoy(position):
+    man = [
+        '0',
+        '/', '|', '\\',
+             '|',
+        '/', '\\'
+    ]
+    sections = [
+        '\n\t+--------+\n\t|\t |\n',
+        '\n=========\n'
+    ]
+    body = ''
+    for i in range(len(man)):
+        if i <= position and position >= 0:
+            if i == 0:
+                body = '\t|\t ' + man[i]
+            elif i > 0 and i < 4:
+                if i == 1:
+                    body = body + "\n\t|\t"
+                body = body + man[i]
+            elif i == 4:
+                body = body + '|\t ' + man[i] + '\n\t|\t'
+            elif i > 4:
+                body = body + man[i] + " "
 
-                if (esIgual)
-                {
-                    Console.WriteLine("Acertaste!");
-                    for (int i = 0; i < palabraGenerada.Length; i++)
-                    {
-                        Console.Write(" {0}", adivinar[i]);
-                    }
-                    Console.WriteLine("");
-                    Console.WriteLine("");
-                }
-                else
-                {
-                    Console.WriteLine("No has acertado");
-                    cont--;
-                }
+            if i > 2 and i < 4:
+                body = body + '\n\t'
+        else:
+            if i > 0:
+                body += "\n"
+            body = body + '\t|\t'
+    body = sections[0] + body + sections[1]
+    print(body)
 
-                bool terminoElJuego = true;
-                for(int i = 0; i < palabraGenerada.Length; i++)
-                {
-                    if(adivinar[i] == '_')
-                    {
-                        terminoElJuego = false;
-                    }
-                }
 
-                if (terminoElJuego)
-                {
-                    Console.WriteLine("GANASTE!!");
-                    break;
+def printHiddenWord():
+    print(['-' * len(CHALLENGE)])
 
-                }
 
-            }
+def checkAnswere(word):
+    letters = list(CHALLENGE)
+    for letter in letters:
+        if(word == letter):
+            return True
+    return False
 
-        }
-    }
-}
+
+if __name__ == "__main__":
+    run()
