@@ -25,4 +25,5 @@ print("la nueva clave es:", nueva_clave)
 Al ejecutar el programa, el programa pregunta el tamano de la clave, luego de digitar la cantidad, el programa muetra la clave en base al numero digitado.
 
 link del video tutorial: https://youtu.be/pugf3mxlr4Q
+https://mailinternacionaledu-my.sharepoint.com/:b:/g/personal/jezernaro_uide_edu_ec/Eb8rohQl9LdNry4-12GPskwBeXHyMg0i7AnaleUbmVmVRw?e=8uUHkn
 
